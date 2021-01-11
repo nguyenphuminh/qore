@@ -3,7 +3,7 @@ stages:
 
 test:
   stage: test
-  image: $CI_REGISTRY/infrastructure/qore-test-base/qore-test-base:develop
+  image: $CI_REGISTRY/infrastructure/qore-test-base/qore-test-base:develop-alpine
   tags:
     - docker-exec
   services:
@@ -31,7 +31,7 @@ test:
     - |
         set +e
         unset QORE_DB_CONNSTR_FREETDS # temp disable freetds testing
-        if test/docker_test/test.sh; then
+        if test/docker_test/test-alpine.sh; then
           curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
             -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
             -d "{\"state\": \"success\", \"context\": \"${REPO_NAME}\", \"description\": \"Gitlab CI\", \"target_url\": \"${CI_JOB_URL}\"}"
