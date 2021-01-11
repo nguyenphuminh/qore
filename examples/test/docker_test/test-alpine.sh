@@ -17,8 +17,8 @@ fi
 
 echo "export QORE_SRC_DIR=${QORE_SRC_DIR}" >> ${ENV_FILE}
 
-echo "export QORE_UID=999" >> ${ENV_FILE}
-echo "export QORE_GID=999" >> ${ENV_FILE}
+echo "export QORE_UID=1000" >> ${ENV_FILE}
+echo "export QORE_GID=1000" >> ${ENV_FILE}
 
 . ${ENV_FILE}
 
