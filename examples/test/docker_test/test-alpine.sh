@@ -34,8 +34,8 @@ make -j${MAKE_JOBS}
 make install
 
 # add Qore user and group
-addgroup -g ${QORUS_GID} qore
-adduser -u ${QORUS_UID} -h ${OMQ_DIR} qore
+addgroup -g ${QORE_GID} qore
+adduser -u ${QORE_UID} -h ${OMQ_DIR} qore
 
 # own everything by the qore user
 chown -R qore:qore ${QORE_SRC_DIR}
