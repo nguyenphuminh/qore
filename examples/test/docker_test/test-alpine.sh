@@ -47,4 +47,4 @@ chown -R qore:qore ${QORE_SRC_DIR}
 # run the tests
 export QORE_MODULE_DIR=${QORE_SRC_DIR}/qlib:${QORE_MODULE_DIR}
 cd ${QORE_SRC_DIR}
-gosu qore:qore ./run_tests.sh
+gosu qore:qore ./run_tests_alpine.sh
