@@ -157,15 +157,15 @@ for test in $TESTS; do
         echo "====================================="
         echo "Running test ($i/$TEST_COUNT): $test"
         echo "-------------------------------------"
-        echo "cmdline: LD_PRELOAD=$LIBQORE $QORE $test $TEST_OUTPUT_FORMAT"
+        echo "cmdline: $QORE $test $TEST_OUTPUT_FORMAT"
         echo "-------------------------------------"
     fi
 
     # Run single test.
     if [ $MEASURE_TIME -eq 1 ]; then
-        eval LD_PRELOAD=$LIBQORE $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
+        eval $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
     else
-        LD_PRELOAD=$LIBQORE $QORE $test $TEST_OUTPUT_FORMAT
+        $QORE $test $TEST_OUTPUT_FORMAT
     fi
 
     if [ $? -eq 0 ]; then
