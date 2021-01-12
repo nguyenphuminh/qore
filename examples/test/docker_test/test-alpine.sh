@@ -20,10 +20,6 @@ echo "export QORE_SRC_DIR=${QORE_SRC_DIR}" >> ${ENV_FILE}
 echo "export QORE_UID=1000" >> ${ENV_FILE}
 echo "export QORE_GID=1000" >> ${ENV_FILE}
 
-echo "cat env.sh"
-cat ${ENV_FILE}
-echo "----------------------------"
-
 . ${ENV_FILE}
 
 export MAKE_JOBS=6
@@ -45,10 +41,14 @@ if ! grep -q "^qore:x:${QORE_UID}" /etc/passwd; then
     adduser -u ${QORE_UID} -G qore -h ${OMQ_DIR} qore
 fi
 
+echo 1
 # own everything by the qore user
 chown -R qore:qore ${QORE_SRC_DIR}
+echo 2
 
 # run the tests
 export QORE_MODULE_DIR=${QORE_SRC_DIR}/qlib:${QORE_MODULE_DIR}
 cd ${QORE_SRC_DIR}
+echo 3
 gosu qore:qore ./run_tests.sh
+echo 4
