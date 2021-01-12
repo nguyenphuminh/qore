@@ -24,7 +24,7 @@ echo "export QORE_GID=1000" >> ${ENV_FILE}
 
 export MAKE_JOBS=6
 
-# build Qore and install
+# build and install Qore
 echo && echo "-- building Qore --"
 cd ${QORE_SRC_DIR}
 mkdir build
