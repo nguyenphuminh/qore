@@ -37,12 +37,12 @@ cmake .. -DCMAKE_BUILD_TYPE=debug -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_INSTALL_PR
 make -j${MAKE_JOBS}
 make install
 
-has_user_been_added() {
-    grep -q "^qore:" /etc/group
+group_exists() {
+    grep -q "^qore:x:${QORE_GID}" /etc/group
 }
 
 # add Qore user and group
-if !has_user_been_added; then
+if ! group_exists; then
     addgroup -g ${QORE_GID} qore
     adduser -u ${QORE_UID} -h ${OMQ_DIR} qore
 fi
