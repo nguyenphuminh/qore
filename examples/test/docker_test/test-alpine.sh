@@ -38,17 +38,13 @@ if ! grep -q "^qore:x:${QORE_GID}" /etc/group; then
     addgroup -g ${QORE_GID} qore
 fi
 if ! grep -q "^qore:x:${QORE_UID}" /etc/passwd; then
-    adduser -u ${QORE_UID} -G qore -h ${OMQ_DIR} qore
+    adduser -u ${QORE_UID} -D -G qore -h ${OMQ_DIR} -s /bin/bash qore
 fi
 
-echo 1
 # own everything by the qore user
 chown -R qore:qore ${QORE_SRC_DIR}
-echo 2
 
 # run the tests
 export QORE_MODULE_DIR=${QORE_SRC_DIR}/qlib:${QORE_MODULE_DIR}
 cd ${QORE_SRC_DIR}
-echo 3
 gosu qore:qore ./run_tests.sh
-echo 4
