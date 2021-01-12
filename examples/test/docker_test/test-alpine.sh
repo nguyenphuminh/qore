@@ -20,6 +20,10 @@ echo "export QORE_SRC_DIR=${QORE_SRC_DIR}" >> ${ENV_FILE}
 echo "export QORE_UID=1234" >> ${ENV_FILE}
 echo "export QORE_GID=1234" >> ${ENV_FILE}
 
+echo "cat env.sh"
+cat ${ENV_FILE}
+echo "----------------------------"
+
 . ${ENV_FILE}
 
 export MAKE_JOBS=6
@@ -33,9 +37,15 @@ cmake .. -DCMAKE_BUILD_TYPE=debug -DSINGLE_COMPILATION_UNIT=1 -DCMAKE_INSTALL_PR
 make -j${MAKE_JOBS}
 make install
 
+has_user_been_added() {
+    grep -q "^qore:" /etc/group
+}
+
 # add Qore user and group
-addgroup -g ${QORE_GID} qore
-adduser -u ${QORE_UID} -h ${OMQ_DIR} qore
+if !has_user_been_added; then
+    addgroup -g ${QORE_GID} qore
+    adduser -u ${QORE_UID} -h ${OMQ_DIR} qore
+fi
 
 # own everything by the qore user
 chown -R qore:qore ${QORE_SRC_DIR}
