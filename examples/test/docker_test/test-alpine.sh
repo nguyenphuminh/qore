@@ -42,10 +42,9 @@ if ! grep -q "^qore:x:${QORE_UID}" /etc/passwd; then
 fi
 
 # own everything by the qore user
-#chown -R qore:qore ${QORE_SRC_DIR}
+chown -R qore:qore ${QORE_SRC_DIR}
 
 # run the tests
 export QORE_MODULE_DIR=${QORE_SRC_DIR}/qlib:${QORE_MODULE_DIR}
 cd ${QORE_SRC_DIR}
-#gosu qore:qore ./run_tests_alpine.sh
-./run_tests_alpine.sh
+gosu qore:qore ./run_tests_alpine.sh

@@ -141,6 +141,9 @@ if [ $MEASURE_TIME -eq 1 ]; then
     printf "TIME_CMD: %s\n" "$TIME_CMD"
 fi
 echo
+echo "=-=-=-=-=-=-=-=-=-=-="
+find / -name "libqore.so*"
+echo "=-=-=-=-=-=-=-=-=-=-="
 
 # Search for tests in the test directory.
 TESTS=`eval find "$TEST_DIRS" -name "*.qtest"`
@@ -157,15 +160,15 @@ for test in $TESTS; do
         echo "====================================="
         echo "Running test ($i/$TEST_COUNT): $test"
         echo "-------------------------------------"
-        echo "cmdline: $QORE $test $TEST_OUTPUT_FORMAT"
+        echo "cmdline: LD_PRELOAD=$LIBQORE $QORE $test $TEST_OUTPUT_FORMAT"
         echo "-------------------------------------"
     fi
 
     # Run single test.
     if [ $MEASURE_TIME -eq 1 ]; then
-        eval $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
+        eval LD_PRELOAD=$LIBQORE $QORE $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
     else
-        $QORE $test $TEST_OUTPUT_FORMAT
+        LD_PRELOAD=$LIBQORE $QORE $QORE $test $TEST_OUTPUT_FORMAT
     fi
 
     if [ $? -eq 0 ]; then
