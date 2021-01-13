@@ -143,6 +143,9 @@ fi
 echo
 echo "=-=-=-=-=-=-=-=-=-=-="
 find / -name "libqore.so*" -exec ls -l {} \;
+echo LD_LIBRARY_PATH before $LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LIBQORE:$LD_LIBRARY_PATH
+echo LD_LIBRARY_PATH after $LD_LIBRARY_PATH
 echo "=-=-=-=-=-=-=-=-=-=-="
 
 # Search for tests in the test directory.
