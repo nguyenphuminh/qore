@@ -184,6 +184,8 @@ for test in $TESTS; do
     if [ $PRINT_TEXT -eq 1 ]; then echo "-------------------------------------"; echo; fi
 done
 
+unset LD_PRELOAD
+
 # Print test summary.
 if [ $PRINT_TEXT -eq 1 ]; then
     TESTING_RESULT=""
