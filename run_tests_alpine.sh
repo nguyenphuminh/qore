@@ -166,9 +166,9 @@ for test in $TESTS; do
 
     # Run single test.
     if [ $MEASURE_TIME -eq 1 ]; then
-        eval LD_PRELOAD=$LIBQORE $QORE $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
+        eval LD_PRELOAD=$LIBQORE $TIME_CMD $QORE $test $TEST_OUTPUT_FORMAT
     else
-        LD_PRELOAD=$LIBQORE $QORE $QORE $test $TEST_OUTPUT_FORMAT
+        LD_PRELOAD=$LIBQORE $QORE $test $TEST_OUTPUT_FORMAT
     fi
 
     if [ $? -eq 0 ]; then
