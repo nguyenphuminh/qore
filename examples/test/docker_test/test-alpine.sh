@@ -24,13 +24,8 @@ echo "export QORE_GID=1000" >> ${ENV_FILE}
 
 export MAKE_JOBS=6
 
-echo "=-=-=-=-=-=-=-=-=-=-=1"
-find / -name "libqore.so*"
-echo "=-=-=-=-=-=-=-=-=-=-=1"
+# remove existing libqore so that LD_PRELOAD is not needed in the run test commands
 find / -name "libqore.so*" -exec rm -f {} \;
-echo "=-=-=-=-=-=-=-=-=-=-=2"
-find / -name "libqore.so*"
-echo "=-=-=-=-=-=-=-=-=-=-=2"
 
 # build and install Qore
 echo && echo "-- building Qore --"
