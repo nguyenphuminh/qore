@@ -136,17 +136,16 @@ echo "Using qore: $QORE"
 echo "Using libqore: $LIBQORE"
 echo "QORE_INCLUDE_DIR=$QORE_INCLUDE_DIR"
 echo "QORE_MODULE_DIR=$QORE_MODULE_DIR"
+LD_PRELOAD=$LIBQORE
+LIBQORE_DIR=`dirname $LIBQORE`
+LIBQORE_ABS_DIR=`realpath $LIBQORE_DIR`
+export LD_LIBRARY_PATH=$LIBQORE_ABS_DIR:$LD_LIBRARY_PATH
+echo "LD_PRELOAD=$LD_PRELOAD"
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 if [ $MEASURE_TIME -eq 1 ]; then
     printf "TIME_CMD: %s\n" "$TIME_CMD"
 fi
 echo
-echo "=-=-=-=-=-=-=-=-=-=-="
-find / -name "libqore.so*" -exec ls -l {} \;
-echo LD_LIBRARY_PATH before $LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=$LIBQORE:$LD_LIBRARY_PATH
-echo LD_LIBRARY_PATH after $LD_LIBRARY_PATH
-echo "=-=-=-=-=-=-=-=-=-=-="
 
 # Search for tests in the test directory.
 TESTS=`eval find "$TEST_DIRS" -name "*.qtest"`
