@@ -141,9 +141,9 @@ if [ $MEASURE_TIME -eq 1 ]; then
     printf "TIME_CMD: %s\n" "$TIME_CMD"
 fi
 echo
-echo "=-=-=-=-=-=-=-=-=-=-="
+echo "=-=-=-=-=-=-=-=-=-=-=3"
 find / -name "libqore.so*"
-echo "=-=-=-=-=-=-=-=-=-=-="
+echo "=-=-=-=-=-=-=-=-=-=-=3"
 
 # Search for tests in the test directory.
 TESTS=`eval find "$TEST_DIRS" -name "*.qtest"`
