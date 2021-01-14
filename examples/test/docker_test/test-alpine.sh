@@ -43,7 +43,7 @@ if ! grep -q "^qore:x:${QORE_GID}" /etc/group; then
     addgroup -g ${QORE_GID} qore
 fi
 if ! grep -q "^qore:x:${QORE_UID}" /etc/passwd; then
-    adduser -u ${QORE_UID} -D -G qore -h ${OMQ_DIR} -s /bin/bash qore
+    adduser -u ${QORE_UID} -D -G qore -h /home/qore -s /bin/bash qore
 fi
 
 # own everything by the qore user
