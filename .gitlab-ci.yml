@@ -9,6 +9,14 @@ services:
   - name: dnhsoft/mysql-utf8:5.7-mb4
     alias: mysql
 
+before_script:
+    - |
+        curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
+        -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
+        -d "{\"state\": \"pending\", \"context\": \"${REPO_NAME}\", \"description\": \"Gitlab CI\", \"target_url\": \"${CI_JOB_URL}\"}"
+    - set +e
+    - unset QORE_DB_CONNSTR_FREETDS # temp disable freetds testing
+
 variables:
   REPO_NAME: qore
   POSTGRES_PASSWORD: omq
@@ -28,12 +36,6 @@ test-alpine:
   image: $CI_REGISTRY/infrastructure/qore-test-base/qore-test-base:develop-alpine
   script:
     - |
-        curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
-        -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
-        -d "{\"state\": \"pending\", \"context\": \"${REPO_NAME}\", \"description\": \"Gitlab CI\", \"target_url\": \"${CI_JOB_URL}\"}"
-    - |
-        set +e
-        unset QORE_DB_CONNSTR_FREETDS # temp disable freetds testing
         if test/docker_test/test-alpine.sh; then
           curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
             -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
@@ -51,12 +53,6 @@ test:
   image: $CI_REGISTRY/infrastructure/qore-test-base/qore-test-base:develop
   script:
     - |
-        curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
-        -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
-        -d "{\"state\": \"pending\", \"context\": \"${REPO_NAME}\", \"description\": \"Gitlab CI\", \"target_url\": \"${CI_JOB_URL}\"}"
-    - |
-        set +e
-        unset QORE_DB_CONNSTR_FREETDS # temp disable freetds testing
         if test/docker_test/test.sh; then
           curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
             -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
