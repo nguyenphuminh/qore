@@ -1,15 +1,14 @@
 stages:
   - test
 
-tags:
-  - docker-exec
-
-services:
-  - name: postgres:13
-  - name: dnhsoft/mysql-utf8:5.7-mb4
-    alias: mysql
-
-before_script:
+default:
+  tags:
+    - docker-exec
+  services:
+    - name: postgres:13
+    - name: dnhsoft/mysql-utf8:5.7-mb4
+      alias: mysql
+  before_script:
     - |
         curl "https://api.github.com/repos/qorelanguage/${REPO_NAME}/statuses/${CI_COMMIT_SHA}" \
         -X POST -u omusil24:${GITHUB_ACCESS_TOKEN} -H "Content-Type: application/json" \
