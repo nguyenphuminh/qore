@@ -4,7 +4,6 @@ set -e
 set -x
 
 ENV_FILE=/tmp/env.sh
-echo QORE_SRC_DIR before $QORE_SRC_DIR
 
 # setup QORE_SRC_DIR env var
 cwd=`pwd`
@@ -15,7 +14,6 @@ if [ "${QORE_SRC_DIR}" = "" ]; then
         QORE_SRC_DIR=$WORKDIR/qore
     fi
 fi
-echo QORE_SRC_DIR after $QORE_SRC_DIR
 
 echo "export QORE_SRC_DIR=${QORE_SRC_DIR}" >> ${ENV_FILE}
 
@@ -29,7 +27,7 @@ export MAKE_JOBS=6
 # remove existing libqore to make sure that the current build will be used
 find / -name "libqore.so*" -exec rm -f {} \;
 
-# build and install Qore
+# build Qore and install
 echo && echo "-- building Qore --"
 cd ${QORE_SRC_DIR}
 mkdir build
