@@ -24,9 +24,6 @@ echo "export QORE_GID=999" >> ${ENV_FILE}
 
 export MAKE_JOBS=6
 
-# remove existing libqore to make sure that the current build will be used
-find / -name "libqore.so*" -exec rm -f {} \;
-
 # build Qore and install
 echo && echo "-- building Qore --"
 cd ${QORE_SRC_DIR}
