@@ -2702,6 +2702,7 @@ void init_qore_threads() {
     // get default stack size
     ta_default.setstacksize(STACK_SIZE);
     qore_thread_stack_size = STACK_SIZE;
+    qore_thread_stack_limit = qore_thread_stack_size - QORE_STACK_GUARD;
 #endif // #ifdef QORE_MANAGE_STACK
 
     // setup parent thread data
